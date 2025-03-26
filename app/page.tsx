@@ -43,7 +43,7 @@ export default async function Home() {
       {/* TitleSection */}
       <section
         id="Top"
-        className="h-[calc(100vh-100px)] flex flex-col justify-center items-center text-center bg-black text-white"
+        className="h-[calc(100vh-100px)] flex flex-col justify-center items-center text-center bg-black text-white fade-in-up"
       >
         <h1 className="text-5xl md:text-7xl font-bold">
           TSURE <span className="text-red-400">ZURE</span>
