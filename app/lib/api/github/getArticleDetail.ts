@@ -61,7 +61,8 @@ export async function fetchArticleDetail(slug: string): Promise<string> {
 
 export const formatMetaBlock = (content: string): ArticleDetail => {
   try {
-    const metadataMatch = content.match(/^---([\s\S]+?)---/);
+    const metadataRegex = /^---([\s\S]+?)---/;
+    const metadataMatch = metadataRegex.exec(content);
     if (!metadataMatch) {
       throw new Error("Invalid article format: Missing metadata section");
     }
@@ -69,10 +70,11 @@ export const formatMetaBlock = (content: string): ArticleDetail => {
 
     const metadata: Partial<ArticleDetail> = {};
     metadataBlock.split("\n").forEach((line) => {
-      const match = line.match(/^([a-zA-Z0-9_]+):\s*(.*)$/);
+      const lineRegex = /^(\w+):\s*(.*)$/;
+      const match = lineRegex.exec(line);
       if (match) {
-        const key = match[1].trim();
-        let value: string | boolean | string[] | Date = match[2].trim();
+        const key = match[1];
+        let value: string | boolean = match[2];
 
         if (
           (value.startsWith('"') && value.endsWith('"')) ||
