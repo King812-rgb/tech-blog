@@ -6,7 +6,7 @@ export function sortArticles(
   n?: number,
   ascend: boolean = false,
 ): Article[] {
-  const sorted = articles.toSorted((a, b) => {
+  const sorted = [...articles].sort((a, b) => {
     const diff =
       new Date(a.body_updated_at).getTime() -
       new Date(b.body_updated_at).getTime();
